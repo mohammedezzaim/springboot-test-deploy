@@ -8,6 +8,6 @@ public class HealthController {
 
     @GetMapping("/")
     public String home() {
-        return "Hello from Railway!";
+        return "Zynerator Hello from Railway!";
     }
 }
