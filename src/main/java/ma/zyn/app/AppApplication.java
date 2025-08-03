@@ -29,10 +29,12 @@ import ma.zyn.app.service.facade.admin.commun.EtatCommandeAdminService;
 
 import ma.zyn.app.zynerator.security.bean.User;
 import ma.zyn.app.zynerator.security.bean.Role;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication(exclude = {
         org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration.class
 })
+@CrossOrigin("*")
 //@EnableFeignClients
 public class AppApplication {
     public static ConfigurableApplicationContext ctx;
