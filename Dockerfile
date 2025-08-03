@@ -1,20 +1,26 @@
-# Stage 1: Build the backend application
+# Étape 1 : Construction de l'application
 FROM maven:3.9.6-eclipse-temurin-17 AS build
-RUN mkdir -p /workspace
 WORKDIR /workspace
-COPY pom.xml /workspace
-COPY src /workspace/src
-RUN mvn -f pom.xml clean package -Dmaven.test.skip
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Stage 2: Run the backend application
-FROM openjdk:17
-COPY --from=build /workspace/target/app-deploy.jar app.jar
-COPY zyn/ssl/localhost/keystore.p12 zyn/ssl/localhost/keystore.p12
-COPY zyn/ssl/prod/keystore.p12 zyn/ssl/prod/keystore.p12
+# Étape 2 : Exécution
+FROM eclipse-temurin:17-jre-alpine
 
+# Configuration pour Railway
+WORKDIR /app
+COPY --from=build /workspace/target/app-deploy.jar .
+COPY zyn/ssl/localhost/keystore.p12 ./keystore-localhost.p12
+COPY zyn/ssl/prod/keystore.p12 ./keystore-prod.p12
+
+# Variables d'environnement pour désactiver les métriques problématiques
+ENV JAVA_TOOL_OPTIONS="-Djava.security.egd=file:/dev/./urandom \
+                      -Dmanagement.metrics.binders.processor.enabled=false \
+                      -Dmanagement.tomcat.metrics.enabled=false"
 
 EXPOSE 8080
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+ENTRYPOINT ["java", "-jar", "app-deploy.jar"]
 
 
 # # Stage 1 : Build avec Maven
