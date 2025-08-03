@@ -30,7 +30,9 @@ import ma.zyn.app.service.facade.admin.commun.EtatCommandeAdminService;
 import ma.zyn.app.zynerator.security.bean.User;
 import ma.zyn.app.zynerator.security.bean.Role;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration.class
+})
 //@EnableFeignClients
 public class AppApplication {
     public static ConfigurableApplicationContext ctx;
