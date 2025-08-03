@@ -13,7 +13,7 @@ COPY zyn/ssl/localhost/keystore.p12 zyn/ssl/localhost/keystore.p12
 COPY zyn/ssl/prod/keystore.p12 zyn/ssl/prod/keystore.p12
 
 
-EXPOSE 8081
+EXPOSE 8080
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
 
