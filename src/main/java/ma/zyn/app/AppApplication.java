@@ -32,7 +32,9 @@ import ma.zyn.app.zynerator.security.bean.Role;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication(exclude = {
-        org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration.class
+        org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration.class,
+        org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration.class,
+        org.springframework.boot.actuate.autoconfigure.metrics.web.tomcat.TomcatMetricsAutoConfiguration.class
 })
 //@EnableFeignClients
 public class AppApplication {
