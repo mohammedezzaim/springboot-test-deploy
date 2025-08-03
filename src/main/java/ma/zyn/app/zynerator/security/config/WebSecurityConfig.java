@@ -62,8 +62,8 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/login").permitAll()
                                 .requestMatchers("/api/test/deploy/").permitAll()
+                                .requestMatchers("/login").permitAll()
                                 .requestMatchers("/forgetPassword", "/register/**", "/verify", "/activateAccount", "/api/user/resend-activation-code", "/api/user/send-forget-password-code", "/api/user/reset-password").permitAll()
                                 .requestMatchers("/actuator/**").permitAll()
                                 .requestMatchers("/api/open/**").permitAll()
