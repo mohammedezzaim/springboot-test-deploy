@@ -15,6 +15,6 @@ WORKDIR /app
 
 COPY --from=build /app/target/app-deploy.jar app.jar
 
-EXPOSE 8080
+EXPOSE 8081
 
 CMD ["java", "-Xms256m", "-Xmx512m", "-jar", "app.jar"]
